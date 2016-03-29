@@ -288,7 +288,7 @@
         ifrCss.innerHTML = '#' + IFRAME_ID + ' { ' + IFRAME_STYLE + ' }';
         document.getElementsByTagName('head')[0].appendChild(ifrCss);
 
-        require([JQS_ATTACH_URL + "/main"], function(sheet) {
+        require([JQS_ATTACH_URL + "/main.js"], function(sheet) {
             sheet.inject(containerDiv, {
                 title: '',
                 inlineMenu: undefined,
@@ -323,16 +323,14 @@
 
     var spawnJqs = function(tableFromWikiText, wikiText)
     {
-        JQS_ATTACH_URL = JQS_ATTACH_URL.substring(1);
         require.config({
               paths: {
-                  "jquery": JQS_ATTACH_URL + "/jquery.min"
-              },
-              baseUrl: '/'
+                  "tableedit_jquery": JQS_ATTACH_URL + "/jquery.min"
+              }
         });
 
         // begin downloading requirements.
-        require([JQS_ATTACH_URL + "/main"], function(sheet) { });
+        require([JQS_ATTACH_URL + "/main.js"], function(sheet) { });
 
         // Passing the ID doesn't work because ModalBox clones the object and mangles the ID.
         var injectLocationClass = 'j-' + Math.random().toString().replace('0.', '');
