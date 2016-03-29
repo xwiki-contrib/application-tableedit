@@ -1,108 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xwikidoc>
-<web>XWiki</web>
-<name>TableEdit</name>
-<language></language>
-<defaultLanguage></defaultLanguage>
-<translation>0</translation>
-<parent>xwiki:XWiki.WebHome</parent>
-<creator>xwiki:XWiki.Admin</creator>
-<author>xwiki:XWiki.Admin</author>
-<customClass></customClass>
-<contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-<creationDate>1357694025000</creationDate>
-<date>1357696926000</date>
-<contentUpdateDate>1357696926000</contentUpdateDate>
-<version>1.1</version>
-<title></title>
-<template></template>
-<defaultTemplate></defaultTemplate>
-<validationScript></validationScript>
-<comment></comment>
-<minorEdit>false</minorEdit>
-<syntaxId>xwiki/2.1</syntaxId>
-<hidden>false</hidden>
-<object>
-<class>
-<name>XWiki.JavaScriptExtension</name>
-<customClass></customClass>
-<customMapping></customMapping>
-<defaultViewSheet></defaultViewSheet>
-<defaultEditSheet></defaultEditSheet>
-<defaultWeb></defaultWeb>
-<nameField></nameField>
-<validationScript></validationScript>
-<cache>
-<cache>0</cache>
-<disabled>0</disabled>
-<displayType>select</displayType>
-<multiSelect>0</multiSelect>
-<name>cache</name>
-<number>5</number>
-<prettyName>Caching policy</prettyName>
-<relationalStorage>0</relationalStorage>
-<separator> </separator>
-<separators> ,|</separators>
-<size>1</size>
-<unmodifiable>0</unmodifiable>
-<values>long|short|default|forbid</values>
-<classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-</cache>
-<code>
-<disabled>0</disabled>
-<name>code</name>
-<number>2</number>
-<prettyName>Code</prettyName>
-<rows>20</rows>
-<size>50</size>
-<unmodifiable>0</unmodifiable>
-<classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-</code>
-<name>
-<disabled>0</disabled>
-<name>name</name>
-<number>1</number>
-<prettyName>Name</prettyName>
-<size>30</size>
-<unmodifiable>0</unmodifiable>
-<classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-</name>
-<parse>
-<disabled>0</disabled>
-<displayFormType>select</displayFormType>
-<displayType>yesno</displayType>
-<name>parse</name>
-<number>4</number>
-<prettyName>Parse content</prettyName>
-<unmodifiable>0</unmodifiable>
-<classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-</parse>
-<use>
-<cache>0</cache>
-<disabled>0</disabled>
-<displayType>select</displayType>
-<multiSelect>0</multiSelect>
-<name>use</name>
-<number>3</number>
-<prettyName>Use this extension</prettyName>
-<relationalStorage>0</relationalStorage>
-<separator> </separator>
-<separators> ,|</separators>
-<size>1</size>
-<unmodifiable>0</unmodifiable>
-<values>currentPage=Always on this page|onDemand=On demand|always=Always on this wiki</values>
-<classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-</use>
-</class>
-<name>XWiki.TableEdit</name>
-<number>1</number>
-<className>XWiki.JavaScriptExtension</className>
-<guid>7a491be1-ee00-4785-9cd0-0adec8173502</guid>
-<property>
-<cache>long</cache>
-</property>
-<property>
-<code>(function()
+(function()
 {
     ## VELOCITY
     ##
@@ -131,7 +27,7 @@
 
         // Get the CSS files.
         var cssFiles = [LIGHTBOX_CSS];
-        for (var i = 0; i &lt; cssFiles.length; i++) {
+        for (var i = 0; i < cssFiles.length; i++) {
             var css = document.createElement('link');
             css.setAttribute('rel', 'stylesheet');
             css.setAttribute('type', 'text/css');
@@ -144,7 +40,7 @@
         // Get require.js if it is not already provided.
         try { require.config } catch (e) { jsFiles.push(REQUIREJS_JS); }
 
-        for (var i = 0; i &lt; jsFiles.length; i++) {
+        for (var i = 0; i < jsFiles.length; i++) {
             var head = document.getElementsByTagName('head')[0];
             var scr = document.createElement('script');
             scr.setAttribute('src', jsFiles[i]);
@@ -166,9 +62,9 @@
                 // The only way to extract information after the form is serialized is
                 // through the style, firefox converts #ffffff to "rgb(255,255,255)"
                 //isHeaderRow = isHeaderRow || (column.style == HEADER_ROW_STYLE);
-                isHeaderRow = isHeaderRow || (column.style != undefined &amp;&amp; column.style != "undefined");
+                isHeaderRow = isHeaderRow || (column.style != undefined && column.style != "undefined");
             }
-            if (outRow.length &gt; 0) {
+            if (outRow.length > 0) {
                 outRow.unshift('');
                 lines.push(outRow.join(isHeaderRow ? '|=' : '|'));
             }
@@ -185,20 +81,20 @@
         meta.rows = wikiTable.length;
         meta.columns = 0;
 
-        for (var i = 0; i &lt; wikiTable.length; i++) {
+        for (var i = 0; i < wikiTable.length; i++) {
             meta.columns = Math.max(meta.columns, wikiTable[i].length);
         }
 
-        for (var i = 0; i &lt; meta.rows; i++) {
+        for (var i = 0; i < meta.rows; i++) {
             var row = wikiTable[i] || {};
             var outRow = data['r' + i] = {};
 
             // TODO make configurable.
             outRow.h = '18px';
 
-            for (var j = 0; j &lt; meta.columns; j++) {
+            for (var j = 0; j < meta.columns; j++) {
                 outRow['c' + j] = {
-                    "value": (j &lt; row.length-1) ? row[j+1] : "",
+                    "value": (j < row.length-1) ? row[j+1] : "",
                     "style": (row[0] == 'th') ? HEADER_ROW_STYLE : "",
                     "colspan": null,
                     "cl": ""
@@ -225,7 +121,7 @@
         var wikiLines = wikiText.split('\n');
         var tables = [];
         var currentTable = {};
-        for (var i = 0; i &lt; wikiLines.length; i++) {
+        for (var i = 0; i < wikiLines.length; i++) {
             // if the last char is a \r then remove it.
             if (wikiLines[i][wikiLines[i].length-1] === '\r') {
                 wikiLines[i] = wikiLines[i].substring(0,wikiLines[i].length-1);
@@ -277,7 +173,7 @@
     var getMeta = function(name)
     {
         var metas = document.getElementsByTagName('meta');
-        for (var i = 0 ; i &lt; metas.length; i++) {
+        for (var i = 0 ; i < metas.length; i++) {
             if (metas[i].name === name) { return metas[i].content; }
         }
     };
@@ -287,7 +183,7 @@
         var params = {
             form_token: getMeta('form_token'),
         //    x-maximized: '',
-        //    parent: 
+        //    parent:
         //    title:
         //    xcontinue:/xwiki/bin/edit/Test/GetContent?editor=wiki
         //    xredirect:
@@ -295,7 +191,7 @@
             content: content,
             xeditaction: 'edit',
             comment: 'Edited table using XWiki.TableEdit',
-            action_saveandcontinue: 'Save &amp; Continue',
+            action_saveandcontinue: 'Save & Continue',
             syntaxId: XWiki.docsyntax,
         //    xhidden: 0,
             minorEdit: 0,
@@ -343,8 +239,8 @@
             var wikiTextOutput = jQuerySheetToWikiText(jqsOutput);
             var lines = wikiText.split('\n');
             var outLines = [];
-            for (var i = 0; i &lt; lines.length; i++) {
-                if (i &lt; data.beginLine || i &gt;= data.endLine) {
+            for (var i = 0; i < lines.length; i++) {
+                if (i < data.beginLine || i >= data.endLine) {
                     outLines.push(lines[i]);
                 } else if (i === data.beginLine) {
                     outLines.push(wikiTextOutput);
@@ -372,7 +268,7 @@
                 // Back in jqueryland
                 var tds = thisSheet.obj.cellActive().closest('tr').find('td');
                 var oldStyle;
-                for (var i = 0; i &lt; tds.length; i++) {
+                for (var i = 0; i < tds.length; i++) {
                     oldStyle = oldStyle || tds[i].getAttribute('style');
                     if (oldStyle == HEADER_ROW_STYLE) {
                         tds[i].removeAttribute("style");
@@ -458,7 +354,7 @@
 
     var gotTables = function(tables, tablesFromWikiText, wikiText)
     {
-        for (var i = 0; i &lt; tables.length; i++) {
+        for (var i = 0; i < tables.length; i++) {
             if (tables[i].getAttribute('class') == 'xwiki-livetable') {
                 tables.splice(i--, 1);
             }
@@ -467,7 +363,7 @@
             console.log("table number mismatch");
             return;
         }
-        for (var i = 0; i &lt; tables.length; i++) {
+        for (var i = 0; i < tables.length; i++) {
             var img = document.createElement('img');
             img.setAttribute('src', '/xwiki/resources/icons/silk/pencil_add.png');
             var link = document.createElement('a');
@@ -504,18 +400,4 @@
             onFailure: function() { console.log('failed'); }
         });
     });
-})();</code>
-</property>
-<property>
-<name></name>
-</property>
-<property>
-<parse>1</parse>
-</property>
-<property>
-<use>always</use>
-</property>
-</object>
-<content>{{info}}
-This document contains code for XWiki.TableEdit extension.
-{{/info}}</content></xwikidoc>
+})();
